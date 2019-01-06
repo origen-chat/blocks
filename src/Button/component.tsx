@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+
 import { ClassNameProp } from '../types';
 
-const Wrapper = styled.button<any>`
+type WrapperProps = Pick<ButtonProps, 'color' | 'disabled' | 'size' | 'type'> &
+  Readonly<{
+    isPointerDown: boolean;
+    isPointerOver: boolean;
+  }>;
+
+const Wrapper = styled.button<WrapperProps>`
   display: inline-flex;
   flex-flow: row nowrap;
   justify-content: center;
