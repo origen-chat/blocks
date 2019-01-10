@@ -11,9 +11,9 @@ export const spaces = css`
   --xl-margin: 1.6rem;
   --xxl-margin: 2rem;
 
-  --xxs-padding: 0.2rem;
-  --xs-padding: 0.3rem;
-  --sm-padding: 0.6rem;
+  --xxs-padding: 0.3rem;
+  --xs-padding: 0.5rem;
+  --sm-padding: 0.8rem;
   --md-padding: 1rem;
   --lg-padding: 1.2rem;
   --xl-padding: 1.6rem;

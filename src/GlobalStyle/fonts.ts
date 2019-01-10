@@ -6,8 +6,8 @@ export const fonts = css`
   --sans-serif-font-family: 'Open Sans', sans-serif;
   --display-font-family: 'Nunito', var(--sans-serif-font-family);
 
-  --xs-font-size: 0.7rem;
-  --sm-font-size: 0.8rem;
+  --xs-font-size: 0.8rem;
+  --sm-font-size: 0.9rem;
   --md-font-size: 1rem;
   --lg-font-size: 1.2rem;
   --xl-font-size: 1.5rem;

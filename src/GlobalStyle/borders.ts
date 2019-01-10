@@ -7,8 +7,8 @@ export const borders = css`
   --lg-border-width: 0.5rem;
   --xl-border-width: 0.7rem;
 
-  --xs-border-radius: 0.1rem;
-  --sm-border-radius: 0.2rem;
+  --xs-border-radius: 0.2rem;
+  --sm-border-radius: 0.3rem;
   --md-border-radius: 0.5rem;
   --lg-border-radius: 0.8rem;
   --xl-border-radius: 1rem;
