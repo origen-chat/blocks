@@ -67,6 +67,7 @@ export type TextInputProps = Readonly<{
   label?: string;
   error?: string;
   helperText?: string;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }> &
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -87,71 +88,76 @@ export type TextInputProps = Readonly<{
 
 export type TextInputType = 'text' | 'number';
 
-export const TextInput: React.FunctionComponent<TextInputProps> = props => {
-  const id = props.id || uuidv4();
+export const TextInput: React.FunctionComponent<TextInputProps> = React.memo(
+  props => {
+    const id = props.id || uuidv4();
 
-  const [hasFocus, setHasFocus] = useState(false);
+    const [hasFocus, setHasFocus] = useState(false);
 
-  const handleFocus: TextInputProps['onFocus'] = event => {
-    setHasFocus(true);
+    const handleFocus: TextInputProps['onFocus'] = event => {
+      setHasFocus(true);
 
-    if (props.onFocus) {
-      props.onFocus(event);
-    }
-  };
+      if (props.onFocus) {
+        props.onFocus(event);
+      }
+    };
 
-  const handleBlur: TextInputProps['onBlur'] = event => {
-    setHasFocus(false);
+    const handleBlur: TextInputProps['onBlur'] = event => {
+      setHasFocus(false);
 
-    if (props.onBlur) {
-      props.onBlur(event);
-    }
-  };
+      if (props.onBlur) {
+        props.onBlur(event);
+      }
+    };
 
-  const [isPointerOver, setIsPointerOver] = useState(false);
+    const [isPointerOver, setIsPointerOver] = useState(false);
 
-  const handlePointerOver: React.PointerEventHandler<HTMLInputElement> = () => {
-    setIsPointerOver(true);
-  };
+    const handlePointerOver: React.PointerEventHandler<
+      HTMLInputElement
+    > = () => {
+      setIsPointerOver(true);
+    };
 
-  const handlePointerLeave: React.PointerEventHandler<
-    HTMLInputElement
-  > = () => {
-    setIsPointerOver(false);
-  };
+    const handlePointerLeave: React.PointerEventHandler<
+      HTMLInputElement
+    > = () => {
+      setIsPointerOver(false);
+    };
 
-  return (
-    <Wrapper className={props.className}>
-      {props.label && (
-        <StyledInputLabel
-          hasFocus={hasFocus}
-          htmlFor={id}
-          label={props.label}
+    return (
+      <Wrapper className={props.className}>
+        {props.label && (
+          <StyledInputLabel
+            hasFocus={hasFocus}
+            htmlFor={id}
+            label={props.label}
+          />
+        )}
+        <StyledInput
+          id={id}
+          name={props.name}
+          type={props.type}
+          value={props.value}
+          onChange={props.onChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder={props.placeholder}
+          isInvalid={!!props.error}
+          isPointerOver={isPointerOver}
+          onPointerOver={handlePointerOver}
+          onPointerLeave={handlePointerLeave}
+          autoFocus={props.autoFocus}
+          autoComplete={props.autoComplete}
+          aria-label={props['aria-label']}
+          aria-required={props['aria-required']}
+          aria-invalid={!!props.error}
+          ref={props.inputRef}
         />
-      )}
-      <StyledInput
-        id={id}
-        name={props.name}
-        type={props.type}
-        value={props.value}
-        onChange={props.onChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        placeholder={props.placeholder}
-        isInvalid={!!props.error}
-        isPointerOver={isPointerOver}
-        onPointerOver={handlePointerOver}
-        onPointerLeave={handlePointerLeave}
-        autoFocus={props.autoFocus}
-        autoComplete={props.autoComplete}
-        aria-label={props['aria-label']}
-        aria-required={props['aria-required']}
-        aria-invalid={!!props.error}
-      />
-      {props.error && <StyledInputError error={props.error} />}
-      {props.helperText && <StyledInputHelperText text={props.helperText} />}
-    </Wrapper>
-  );
-};
+        {props.error && <StyledInputError error={props.error} />}
+        {props.helperText && <StyledInputHelperText text={props.helperText} />}
+      </Wrapper>
+    );
+  },
+);
 
 export default TextInput;

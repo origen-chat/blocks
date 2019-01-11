@@ -1,6 +1,11 @@
-import { configure as configureEnzyme } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
-import 'jest-enzyme';
+import 'jest-dom/extend-expect';
 import 'jest-styled-components';
+import { cleanup } from 'react-testing-library';
 
-configureEnzyme({ adapter: new EnzymeAdapter() });
+setupTestFramework();
+
+function setupTestFramework(): void {
+  afterEach(() => {
+    cleanup();
+  });
+}

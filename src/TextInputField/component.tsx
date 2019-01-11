@@ -19,6 +19,7 @@ export type TextInputFieldProps = Pick<
   | 'autoComplete'
   | 'aria-label'
   | 'aria-required'
+  | 'inputRef'
 > &
   Pick<
     FieldProps,
@@ -60,6 +61,7 @@ export const TextInputField: React.FunctionComponent<
         aria-label={props['aria-label']}
         aria-required={props['aria-required']}
         className={props.className}
+        inputRef={props.inputRef}
       />
     )}
   />
