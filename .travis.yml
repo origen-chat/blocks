@@ -16,12 +16,13 @@ jobs:
   include:
     - stage: lint
       <<: *node_js_defaults
-      script: yarn lint:check
+      script:
+        - yarn typecheck
+        - yarn lint:check
 
     - stage: test
       <<: *node_js_defaults
-      script:
-        - exit 0
+      script: yarn test:ci
 
     - stage: release
       <<: *node_js_defaults

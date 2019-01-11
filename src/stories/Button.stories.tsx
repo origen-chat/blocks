@@ -14,7 +14,7 @@ const events = actions(
   'onPointerLeave',
 );
 
-storiesOf(Button.name, module).add('contained', () => (
+storiesOf('Button', module).add('contained', () => (
   <Button
     type="contained"
     color={select(

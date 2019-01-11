@@ -8,7 +8,7 @@ import TextInput from '../TextInput';
 
 const events = actions('onChange', 'onFocus', 'onBlur');
 
-storiesOf(TextInput.name, module).add('generic', () => (
+storiesOf('TextInput', module).add('generic', () => (
   <TextInput
     type={select('Type', { Text: 'text', Number: 'number' }, 'text')}
     value={text('Value', '')}
