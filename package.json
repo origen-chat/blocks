@@ -1,5 +1,6 @@
 {
   "name": "@origen/blocks",
+  "description": "UI building blocks for Origen",
   "version": "0.0.1",
   "license": "MIT",
   "private": false,
@@ -19,7 +20,7 @@
     "build-types": "tsc --emitDeclarationOnly",
     "prebuild": "yarn clean && yarn typecheck && yarn lint:check",
     "storybook": "start-storybook --host 0.0.0.0 --port 5001 --config-dir .storybook --https --ssl-cert ./keys/cert.pem --ssl-key ./keys/key.pem",
-    "build-storybook": "build-storybook --config-dir .storybook --output-dir storybookDist",
+    "build-storybook": "cross-env NODE_ENV=production build-storybook --config-dir .storybook --output-dir storybookDist",
     "make-keys": "mkcert localhost 127.0.0.1 ::1 0.0.0.0",
     "premake-keys": "rimraf keys",
     "postmake-keys": "mkdirp keys && mv localhost+3.pem keys/cert.pem && mv localhost+3-key.pem keys/key.pem",
@@ -122,6 +123,21 @@
     "tslint-config-prettier": "1.17.0",
     "typescript": "3.2.2",
     "typescript-eslint-parser": "21.0.2"
+  },
+  "keywords": [
+    "blocks",
+    "react",
+    "design",
+    "origen",
+    "UI"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/origen-chat/blocks.git"
+  },
+  "bugs": {
+    "email": "strattadb@gmail.com",
+    "url": "https://github.com/origen-chat/blocks/issues"
   },
   "engines": {
     "node": ">= 10.6.0"

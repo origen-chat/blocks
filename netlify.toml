@@ -6,12 +6,7 @@
   # Command to build the files.
   command = "yarn build-storybook"
 
-  environment = { NODE_ENV = "production" }
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[context.develop]
-  environment = { NODE_ENV = "production" }
