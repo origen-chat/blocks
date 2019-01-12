@@ -99,7 +99,6 @@
     "react": "16.8.0-alpha.0",
     "react-dom": "16.8.0-alpha.0",
     "react-final-form": "4.0.2",
-    "react-test-renderer": "16.8.0-alpha.0",
     "react-testing-library": "5.4.4",
     "rollup": "1.0.2",
     "rollup-plugin-babel": "4.2.0",
