@@ -1,7 +1,6 @@
 {
   "name": "@origen/blocks",
-  "description": "UI building blocks for Origen",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "private": false,
   "main": "dist/index.js",
