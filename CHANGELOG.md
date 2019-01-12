@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/origen-chat/blocks/compare/v1.0.0...v1.0.1) (2019-01-12)
+
+
+### Bug Fixes
+
+* fix netlify build ([b3fe074](https://github.com/origen-chat/blocks/commit/b3fe074))
+
 # 1.0.0 (2019-01-12)
 
 
