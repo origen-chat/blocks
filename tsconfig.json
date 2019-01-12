@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "charset": "utf8",
-    "module": "commonjs",
+    "module": "CommonJS",
     "strict": true,
     "target": "ESNext",
     "jsx": "react",
@@ -11,6 +11,7 @@
     "declarationDir": "dist",
     "sourceMap": true,
     "noErrorTruncation": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,

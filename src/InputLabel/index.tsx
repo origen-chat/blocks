@@ -1,1 +1,2 @@
-export { default, InputLabel, InputLabelProps } from './component';
+export * from './component';
+export { default } from './component';

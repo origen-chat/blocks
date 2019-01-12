@@ -1,8 +1,2 @@
-export {
-  default,
-  Button,
-  ButtonColor,
-  ButtonProps,
-  ButtonSize,
-  ButtonType,
-} from './component';
+export * from './component';
+export { default } from './component';

@@ -1,1 +1,2 @@
-export { default, InputHelperText, InputHelperTextProps } from './component';
+export * from './component';
+export { default } from './component';

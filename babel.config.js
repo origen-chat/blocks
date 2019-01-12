@@ -4,7 +4,7 @@ module.exports = api => {
   return {
     presets: getPresets(babelEnv),
     plugins: getPlugins(babelEnv),
-    ignore: ['node_modules'],
+    exclude: 'node_modules/**',
   };
 };
 

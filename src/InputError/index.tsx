@@ -1,1 +1,2 @@
-export { default, InputError, InputErrorProps } from './component';
+export * from './component';
+export { default } from './component';

@@ -1,1 +1,2 @@
-export { default, TextInputProps, TextInputType, TextInput } from './component';
+export * from './component';
+export { default } from './component';
