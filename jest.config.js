@@ -6,13 +6,24 @@ module.exports = {
     'src/**/*.{ts,tsx}',
     '!**/node_modules/**',
     '!**/dist/**',
+    '!**/storybookDist/**',
   ],
-  coveragePathIgnorePatterns: ['node_modules/', '<rootDir>/dist/'],
+  coveragePathIgnorePatterns: [
+    'node_modules/',
+    '<rootDir>/dist/',
+    '<rootDir>/storybookDist/',
+  ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
   testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   setupTestFrameworkScriptFile: './src/jest.setup.ts',
-  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  modulePathIgnorePatterns: [
+    'node_modules',
+    '<rootDir>/dist/',
+    '<rootDir>/storybookDist',
+  ],
   transform: {
     '^.+\\.(jsx?|tsx?)$': 'babel-jest',
   },
+  errorOnDeprecated: true,
+  watchPathIgnorePatterns: ['node_modules'],
 };

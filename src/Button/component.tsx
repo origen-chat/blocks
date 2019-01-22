@@ -3,7 +3,10 @@ import styled, { css } from 'styled-components';
 
 import { ClassNameProp } from '../types';
 
-type WrapperProps = Pick<ButtonProps, 'color' | 'disabled' | 'size' | 'type'> &
+type WrapperProps = Pick<
+  ButtonProps,
+  'color' | 'disabled' | 'size' | 'variant'
+> &
   Readonly<{
     isPointerDown: boolean;
     isPointerOver: boolean;
@@ -14,13 +17,14 @@ const Wrapper = styled.button<WrapperProps>`
   flex-flow: row nowrap;
   justify-content: center;
 
-  border-radius: var(--xxl-border-radius);
-  text-transform: uppercase;
-  letter-spacing: var(--lg-letter-spacing);
+  border-radius: var(--md-border-radius);
   font-weight: var(--bold-font-weight);
+  transition: var(--md-transition);
+
+  outline: none;
 
   ${props =>
-    (props.type as ButtonType) === 'contained' &&
+    (props.variant as ButtonVariant) === 'contained' &&
     css`
       border-style: none;
     `}
@@ -66,7 +70,7 @@ const Label = styled.span`
 
 export type ButtonProps = Readonly<{
   label: string;
-  type?: ButtonType;
+  variant?: ButtonVariant;
   color?: ButtonColor;
   size?: ButtonSize;
   disabled?: boolean;
@@ -80,7 +84,7 @@ export type ButtonProps = Readonly<{
   > &
   ClassNameProp;
 
-export type ButtonType = 'contained' | 'outlined' | 'text';
+export type ButtonVariant = 'contained' | 'outlined' | 'text';
 export type ButtonColor = 'primary' | 'accent' | 'danger';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
@@ -131,7 +135,7 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
 
   return (
     <Wrapper
-      type={props.type}
+      variant={props.variant}
       size={props.size}
       color={props.color}
       onPointerDown={handlePointerDown}
@@ -152,7 +156,7 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
 Button.defaultProps = {
   color: 'primary',
   size: 'medium',
-  type: 'contained',
+  variant: 'contained',
 };
 
 export default Button;

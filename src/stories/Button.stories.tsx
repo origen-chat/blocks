@@ -16,7 +16,7 @@ const events = actions(
 
 storiesOf('Button', module).add('contained', () => (
   <Button
-    type="contained"
+    variant="contained"
     color={select(
       'Color',
       { Primary: 'primary', Accent: 'accent', Danger: 'danger' },

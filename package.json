@@ -25,7 +25,7 @@
     "premake-keys": "yarn clean-keys",
     "postmake-keys": "mkdirp keys && mv localhost+3.pem keys/cert.pem && mv localhost+3-key.pem keys/key.pem",
     "test": "cross-env NODE_ENV=test jest",
-    "test:watch": "yarn test --onlyChanged --watch",
+    "test:watch": "yarn test --config=jest.config.js --onlyChanged --watch",
     "test:ci": "yarn test --coverage",
     "test:debug": "cross-env NODE_ENV=test node --inspect-brk=0.0.0.0:5100 --nolazy node_modules/.bin/jest --runInBand",
     "posttest:ci": "yarn coverage",
@@ -34,7 +34,7 @@
     "lint:fix": "eslint --fix \"src/**/*.{js,ts,tsx}\"",
     "clean-dist": "rimraf dist",
     "clean-storybookDist": "rimraf storybookDist",
-    "clean-keys": "rimraf keys",
+    "clean-keys": "rimraf keys/cert.pem keys/key.pem",
     "coverage": "codecov",
     "commit": "commit",
     "semantic-release": "semantic-release"
