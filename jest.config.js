@@ -14,16 +14,16 @@ module.exports = {
     '<rootDir>/storybookDist/',
   ],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-  setupTestFrameworkScriptFile: './src/jest.setup.ts',
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$',
+  setupFilesAfterEnv: ['./src/jest.setup.ts'],
   modulePathIgnorePatterns: [
     'node_modules',
     '<rootDir>/dist/',
     '<rootDir>/storybookDist',
   ],
   transform: {
-    '^.+\\.(jsx?|tsx?)$': 'babel-jest',
+    '^.+\\.[jt]sx?$': 'babel-jest',
   },
   errorOnDeprecated: true,
-  watchPathIgnorePatterns: ['node_modules'],
+  watchPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
 };

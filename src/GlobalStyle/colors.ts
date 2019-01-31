@@ -29,7 +29,7 @@ export const colors = css`
   --accent-color-900: hsl();
 
   --grey-100: hsla(226, 13%, 98%, 1);
-  --grey-200: hsla(226, 13%, 86%, 1);
+  --grey-200: hsla(226, 13%, 90%, 1);
   --grey-300: hsla(226, 13%, 74%, 1);
   --grey-400: hsla(226, 13%, 65%, 1);
   --grey-500: hsla(226, 13%, 50%, 1);

@@ -1,11 +1,12 @@
 module.exports = {
   root: true,
 
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
 
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
+    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
@@ -20,7 +21,7 @@ module.exports = {
     'react-hooks',
     'import',
     'jsx-a11y',
-    'typescript',
+    '@typescript-eslint',
     'fp',
     'eslint-comments',
     'prettier',
@@ -29,7 +30,6 @@ module.exports = {
   env: {
     es6: true,
     browser: true,
-    serviceworker: true,
     jest: true,
   },
 
@@ -40,6 +40,7 @@ module.exports = {
     'plugin:unicorn/recommended',
     'plugin:jest/recommended',
     'airbnb',
+    'plugin:@typescript-eslint/recommended',
     'plugin:eslint-comments/recommended',
     'plugin:fp/recommended',
     'prettier',
@@ -48,7 +49,6 @@ module.exports = {
 
   rules: {
     'no-use-before-define': 'off',
-    'no-unused-vars': 'off',
 
     'unicorn/filename-case': 'off',
 
@@ -60,6 +60,7 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
+    'import/order': ['error', { 'newlines-between': 'always' }],
 
     'prettier/prettier': 'error',
 
@@ -77,6 +78,10 @@ module.exports = {
     'fp/no-rest-parameters': 'off',
     'fp/no-this': 'off',
     'fp/no-class': 'off',
+
+    '@typescript-eslint/indent': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
   },
 
   settings: {
@@ -90,13 +95,12 @@ module.exports = {
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],
-      parser: 'typescript-eslint-parser',
 
       rules: {
         'no-undef': 'off',
+        'no-unused-vars': 'off',
         'no-restricted-globals': 'off',
         'no-shadow': 'off',
-        camelcase: 'off',
         'prefer-destructuring': 'off',
         'no-multi-str': 'off',
 
@@ -104,14 +108,20 @@ module.exports = {
         'react/sort-comp': 'off',
         'react/destructuring-assignment': 'off',
 
+        'react-hooks/rules-of-hooks': 'error',
+
         'import/export': 'off',
 
-        'typescript/no-unused-vars': 'error',
-        'typescript/class-name-casing': 'error',
-        'typescript/generic-type-naming': ['error', '^T[A-Z][a-zA-Z]+$'],
-        'typescript/no-non-null-assertion': 'error',
-
-        'react-hooks/rules-of-hooks': 'error',
+        '@typescript-eslint/generic-type-naming': [
+          'error',
+          '^T[A-Z][a-zA-Z]+$',
+        ],
+        '@typescript-eslint/no-this-alias': 'error',
+        // '@typescript-eslint/restrict-plus-operands': 'error',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/indent': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
       },
     },
   ],

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import uuidv4 from 'uuid/v4';
 
+import Input from '../Input';
 import InputError from '../InputError';
 import InputHelperText from '../InputHelperText';
 import InputLabel from '../InputLabel';
@@ -14,34 +15,8 @@ const Wrapper = styled.div`
   align-items: flex-start;
 `;
 
-type StyledInputProps = Readonly<{
-  isInvalid: boolean;
-  isPointerOver: boolean;
-}>;
-
-const StyledInput = styled.input<StyledInputProps>`
+const StyledInput = styled(Input)`
   align-self: stretch;
-
-  font-size: var(--md-font-size);
-
-  padding: var(--sm-padding) var(--sm-padding);
-
-  border-color: ${props =>
-    props.isInvalid ? 'var(--danger-color-500)' : 'var(--grey-200)'};
-  border-style: solid;
-  border-width: var(--xs-border-width);
-  border-radius: var(--sm-border-radius);
-  outline: none;
-  transition: var(--sm-transition);
-
-  &:focus {
-    border-color: ${props =>
-      props.isInvalid ? 'var(--danger-color-500)' : 'var(--primary-color-500)'};
-  }
-
-  &:not(:focus) {
-    border-color: ${props => props.isPointerOver && 'var(--grey-300)'};
-  }
 `;
 
 const StyledInputLabel = styled(InputLabel)`
@@ -64,18 +39,18 @@ const StyledInputHelperText = styled(InputHelperText)`
 
 export type TextInputProps = Readonly<{
   type?: TextInputType;
+  value: string;
   label?: string;
   error?: string;
   helperText?: string;
+  onChange: (value: string) => void;
   inputRef?: React.RefObject<HTMLInputElement>;
 }> &
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
-    | 'onChange'
     | 'onFocus'
     | 'onBlur'
     | 'name'
-    | 'value'
     | 'id'
     | 'placeholder'
     | 'disabled'
@@ -88,76 +63,79 @@ export type TextInputProps = Readonly<{
 
 export type TextInputType = 'text' | 'number';
 
-export const TextInput: React.FunctionComponent<TextInputProps> = React.memo(
-  props => {
-    const id = props.id || uuidv4();
+export const TextInput: React.FunctionComponent<TextInputProps> = props => {
+  const id = props.id || uuidv4();
 
-    const [hasFocus, setHasFocus] = useState(false);
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+    const { value } = event.target;
 
-    const handleFocus: TextInputProps['onFocus'] = event => {
-      setHasFocus(true);
+    props.onChange(value);
+  };
 
-      if (props.onFocus) {
-        props.onFocus(event);
-      }
-    };
+  const [hasFocus, setHasFocus] = useState(false);
 
-    const handleBlur: TextInputProps['onBlur'] = event => {
-      setHasFocus(false);
+  const handleFocus: TextInputProps['onFocus'] = event => {
+    setHasFocus(true);
 
-      if (props.onBlur) {
-        props.onBlur(event);
-      }
-    };
+    if (props.onFocus) {
+      props.onFocus(event);
+    }
+  };
 
-    const [isPointerOver, setIsPointerOver] = useState(false);
+  const handleBlur: TextInputProps['onBlur'] = event => {
+    setHasFocus(false);
 
-    const handlePointerOver: React.PointerEventHandler<
-      HTMLInputElement
-    > = () => {
-      setIsPointerOver(true);
-    };
+    if (props.onBlur) {
+      props.onBlur(event);
+    }
+  };
 
-    const handlePointerLeave: React.PointerEventHandler<
-      HTMLInputElement
-    > = () => {
-      setIsPointerOver(false);
-    };
+  const [isPointerOver, setIsPointerOver] = useState(false);
 
-    return (
-      <Wrapper className={props.className}>
-        {props.label && (
-          <StyledInputLabel
-            hasFocus={hasFocus}
-            htmlFor={id}
-            label={props.label}
-          />
-        )}
-        <StyledInput
-          id={id}
-          name={props.name}
-          type={props.type}
-          value={props.value}
-          onChange={props.onChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          placeholder={props.placeholder}
-          isInvalid={!!props.error}
-          isPointerOver={isPointerOver}
-          onPointerOver={handlePointerOver}
-          onPointerLeave={handlePointerLeave}
-          autoFocus={props.autoFocus}
-          autoComplete={props.autoComplete}
-          aria-label={props['aria-label']}
-          aria-required={props['aria-required']}
-          aria-invalid={!!props.error}
-          ref={props.inputRef}
+  const handlePointerOver: React.PointerEventHandler<HTMLInputElement> = () => {
+    setIsPointerOver(true);
+  };
+
+  const handlePointerLeave: React.PointerEventHandler<
+    HTMLInputElement
+  > = () => {
+    setIsPointerOver(false);
+  };
+
+  return (
+    <Wrapper className={props.className}>
+      {props.label && (
+        <StyledInputLabel
+          hasFocus={hasFocus}
+          htmlFor={id}
+          label={props.label}
         />
-        {props.error && <StyledInputError error={props.error} />}
-        {props.helperText && <StyledInputHelperText text={props.helperText} />}
-      </Wrapper>
-    );
-  },
-);
+      )}
+      <StyledInput
+        id={id}
+        name={props.name}
+        type={props.type}
+        value={props.value}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        placeholder={props.placeholder}
+        isInvalid={!!props.error}
+        isPointerOver={isPointerOver}
+        onPointerOver={handlePointerOver}
+        onPointerLeave={handlePointerLeave}
+        autoFocus={props.autoFocus}
+        autoComplete={props.autoComplete}
+        disabled={props.disabled}
+        aria-label={props['aria-label']}
+        aria-required={props['aria-required']}
+        aria-invalid={!!props.error}
+        ref={props.inputRef}
+      />
+      {props.error && <StyledInputError error={props.error} />}
+      {props.helperText && <StyledInputHelperText text={props.helperText} />}
+    </Wrapper>
+  );
+};
 
-export default TextInput;
+export default React.memo(TextInput);
