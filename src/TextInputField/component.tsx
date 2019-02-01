@@ -50,7 +50,11 @@ export const TextInputField: React.FunctionComponent<
       <TextInput
         id={props.id}
         type={props.type}
-        {...input}
+        name={input.name}
+        value={input.value}
+        onChange={input.onChange}
+        onFocus={input.onFocus}
+        onBlur={input.onBlur}
         placeholder={props.placeholder}
         disabled={props.disabled}
         label={props.label}
@@ -66,5 +70,7 @@ export const TextInputField: React.FunctionComponent<
     )}
   />
 );
+
+const a = <TextInputField name="s" onChange={jest.fn()} />;
 
 export default TextInputField;
