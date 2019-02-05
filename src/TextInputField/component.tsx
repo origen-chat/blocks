@@ -71,6 +71,4 @@ export const TextInputField: React.FunctionComponent<
   />
 );
 
-const a = <TextInputField name="s" onChange={jest.fn()} />;
-
 export default TextInputField;
