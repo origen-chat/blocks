@@ -69,7 +69,7 @@
     "@types/node": "10.12.21",
     "@types/react": "16.8.2",
     "@types/react-beautiful-dnd": "10.0.2",
-    "@types/react-dom": "16.0.11",
+    "@types/react-dom": "16.8.0",
     "@types/react-transition-group": "2.0.15",
     "@types/storybook__addon-a11y": "3.3.1",
     "@types/storybook__addon-actions": "3.4.1",
