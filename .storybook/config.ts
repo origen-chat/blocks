@@ -5,20 +5,32 @@ import React from 'react';
 
 import GlobalStyle from '../src/GlobalStyle';
 
-addDecorator(checkA11y);
-addDecorator(withKnobs);
+configureStorybook();
 
-addDecorator(storyFn =>
-  React.createElement(
-    React.Fragment,
-    null,
-    React.createElement(GlobalStyle, null, null),
-    React.createElement('div', null, storyFn()),
-  ),
-);
+function configureStorybook() {
+  addDecorators();
 
-function loadStories() {
-  require('../src/stories');
+  configure(loadStories, module);
 }
 
-configure(loadStories, module);
+function addDecorators() {
+  addDecorator(checkA11y);
+  addDecorator(withKnobs);
+
+  addDecorator(storyFn =>
+    React.createElement(
+      React.Fragment,
+      null,
+      React.createElement(GlobalStyle, null, null),
+      React.createElement('div', null, storyFn()),
+    ),
+  );
+}
+
+function loadStories() {
+  const requireContext = require.context('../src', true, /\.stories\.tsx$/);
+
+  requireContext.keys().forEach(key => {
+    requireContext(key);
+  });
+}

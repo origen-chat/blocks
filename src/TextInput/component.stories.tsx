@@ -4,7 +4,7 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 
-import TextInput from '../TextInput';
+import TextInput from './component';
 
 const events = actions('onChange', 'onFocus', 'onBlur');
 
