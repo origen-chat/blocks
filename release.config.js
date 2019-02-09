@@ -16,10 +16,11 @@ const gitPlugin = {
   assets: gitPluginAssets,
 };
 
-const githubPlugin = '@semantic-release/github';
+const githubPlugin = { path: '@semantic-release/github' };
 
 module.exports = {
   branch: 'master',
   verifyConditions: [changelogPlugin, npmPlugin, gitPlugin, githubPlugin],
   prepare: [changelogPlugin, npmPlugin, gitPlugin],
+  success: [],
 };

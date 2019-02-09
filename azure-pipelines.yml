@@ -11,7 +11,7 @@ steps:
   - script: yarn install
     displayName: 'Install dependencies'
 
-  - script: yarn lint
+  - script: yarn lint:check
     displayName: 'Linter check'
 
   - script: yarn typecheck
