@@ -21,8 +21,13 @@ steps:
     displayName: 'Test'
 
   - script: yarn upload-coverage
+    env:
+      CODECOV_TOKEN: $(CODECOV_TOKEN)
     displayName: 'Upload coverage report'
 
   - script: yarn semantic-release
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    env:
+      GITHUB_TOKEN: $(GITHUB_TOKEN)
+      NPM_TOKEN: $(NPM_TOKEN)
     displayName: 'Release'
