@@ -24,5 +24,5 @@ steps:
     displayName: 'Upload coverage report'
 
   - script: yarn semantic-release
-    condition: and(succeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     displayName: 'Release'
