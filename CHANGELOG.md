@@ -1,5 +1,17 @@
 # Changelog
 
+# [1.1.0](https://github.com/origen-chat/blocks/compare/v1.0.1...v1.1.0) (2019-02-09)
+
+
+### Bug Fixes
+
+* remove unused var ([a24afd8](https://github.com/origen-chat/blocks/commit/a24afd8))
+
+
+### Features
+
+* add Input internal component ([0c0dd51](https://github.com/origen-chat/blocks/commit/0c0dd51))
+
 ## [1.0.1](https://github.com/origen-chat/blocks/compare/v1.0.0...v1.0.1) (2019-01-12)
 
 
