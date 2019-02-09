@@ -31,3 +31,6 @@ steps:
       GITHUB_TOKEN: $(GITHUB_TOKEN)
       NPM_TOKEN: $(NPM_TOKEN)
     displayName: 'Release'
+
+variables:
+  CI: true

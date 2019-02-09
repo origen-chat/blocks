@@ -16,7 +16,7 @@ const gitPlugin = {
   assets: gitPluginAssets,
 };
 
-const githubPlugin = { path: '@semantic-release/github' };
+const githubPlugin = '@semantic-release/github';
 
 module.exports = {
   branch: 'master',
