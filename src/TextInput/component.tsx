@@ -45,26 +45,25 @@ export type TextInputProps = Readonly<{
   helperText?: string;
   onChange: (value: string) => void;
   inputRef?: React.RefObject<HTMLInputElement>;
+  required?: boolean;
 }> &
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
     | 'onFocus'
     | 'onBlur'
     | 'name'
-    | 'id'
     | 'placeholder'
     | 'disabled'
     | 'autoFocus'
     | 'autoComplete'
-    | 'aria-label'
-    | 'aria-required'
   > &
   ClassNameProp;
 
-export type TextInputType = 'text' | 'number';
+export type TextInputType = 'text' | 'number' | 'password';
 
 export const TextInput: React.FunctionComponent<TextInputProps> = props => {
-  const id = props.id || uuidv4();
+  const inputId = useUUIDv4();
+  const helperTextId = useUUIDv4();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = event => {
     const { value } = event.target;
@@ -107,12 +106,13 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
       {props.label && (
         <StyledInputLabel
           hasFocus={hasFocus}
-          htmlFor={id}
+          htmlFor={inputId}
           label={props.label}
+          required={!!props.required}
         />
       )}
       <StyledInput
-        id={id}
+        id={inputId}
         name={props.name}
         type={props.type}
         value={props.value}
@@ -127,15 +127,23 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
         autoFocus={props.autoFocus}
         autoComplete={props.autoComplete}
         disabled={props.disabled}
-        aria-label={props['aria-label']}
-        aria-required={props['aria-required']}
+        aria-required={!!props.required}
         aria-invalid={!!props.error}
+        aria-describedby={helperTextId}
         ref={props.inputRef}
       />
       {props.error && <StyledInputError error={props.error} />}
-      {props.helperText && <StyledInputHelperText text={props.helperText} />}
+      {props.helperText && (
+        <StyledInputHelperText id={helperTextId} text={props.helperText} />
+      )}
     </Wrapper>
   );
 };
+
+function useUUIDv4(): string {
+  const [uuid] = useState(() => uuidv4());
+
+  return uuid;
+}
 
 export default React.memo(TextInput);

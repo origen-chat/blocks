@@ -10,12 +10,17 @@ const events = actions('onChange', 'onFocus', 'onBlur');
 
 storiesOf('TextInput', module).add('generic', () => (
   <TextInput
-    type={select('Type', { Text: 'text', Number: 'number' }, 'text')}
+    type={select(
+      'Type',
+      { Text: 'text', Number: 'number', Password: 'password' },
+      'text',
+    )}
     value={text('Value', '')}
     placeholder={text('Placeholder', 'Placeholder')}
     label={text('Label', 'Text input')}
     error={text('Error', '')}
     helperText={text('Helper text', '')}
+    required={boolean('Required', false)}
     disabled={boolean('Disabled', false)}
     {...events}
   />

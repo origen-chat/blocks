@@ -1,0 +1,27 @@
+pool:
+  vmImage: 'ubuntu-16.04'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '11.9.0'
+    displayName: 'Install Node.js'
+
+
+  - script: yarn install
+    displayName: 'Install dependencies'
+
+  - script: yarn lint
+    displayName: 'Linter check'
+
+  - script: yarn typecheck
+    displayName: 'Typecheck'
+
+  - script: yarn test:ci
+    displayName: 'Test'
+
+  - script: yarn upload-coverage
+    displayName: 'Upload coverage report'
+
+  - script: yarn semantic-release
+    displayName: 'Release'

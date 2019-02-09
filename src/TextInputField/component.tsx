@@ -9,7 +9,6 @@ export type TextInputFieldProps = Pick<
   | 'type'
   | 'label'
   | 'helperText'
-  | 'id'
   | 'onChange'
   | 'onFocus'
   | 'onBlur'
@@ -17,8 +16,7 @@ export type TextInputFieldProps = Pick<
   | 'disabled'
   | 'autoFocus'
   | 'autoComplete'
-  | 'aria-label'
-  | 'aria-required'
+  | 'required'
   | 'inputRef'
 > &
   Pick<
@@ -48,7 +46,6 @@ export const TextInputField: React.FunctionComponent<
     subscription={props.subscription}
     render={({ input, meta }) => (
       <TextInput
-        id={props.id}
         type={props.type}
         name={input.name}
         value={input.value}
@@ -59,11 +56,10 @@ export const TextInputField: React.FunctionComponent<
         disabled={props.disabled}
         label={props.label}
         helperText={props.helperText}
-        error={meta.touched && meta.error}
+        error={meta.touched ? meta.error : undefined}
         autoFocus={props.autoFocus}
         autoComplete={props.autoComplete}
-        aria-label={props['aria-label']}
-        aria-required={props['aria-required']}
+        required={props.required}
         className={props.className}
         inputRef={props.inputRef}
       />
