@@ -9,7 +9,6 @@ export type TextInputFieldProps = Pick<
   | 'type'
   | 'label'
   | 'helperText'
-  | 'onChange'
   | 'onFocus'
   | 'onBlur'
   | 'placeholder'
@@ -17,8 +16,10 @@ export type TextInputFieldProps = Pick<
   | 'autoFocus'
   | 'autoComplete'
   | 'required'
+  | 'size'
   | 'inputRef'
 > &
+  Partial<Pick<TextInputProps, 'onChange'>> &
   Pick<
     FieldProps,
     | 'name'
@@ -34,37 +35,52 @@ export type TextInputFieldProps = Pick<
 
 export const TextInputField: React.FunctionComponent<
   TextInputFieldProps
-> = props => (
-  <Field
-    name={props.name}
-    validate={props.validate}
-    parse={props.parse}
-    format={props.format}
-    isEqual={props.isEqual}
-    formatOnBlur={props.formatOnBlur}
-    allowNull={props.allowNull}
-    subscription={props.subscription}
-    render={({ input, meta }) => (
-      <TextInput
-        type={props.type}
-        name={input.name}
-        value={input.value}
-        onChange={input.onChange}
-        onFocus={input.onFocus}
-        onBlur={input.onBlur}
-        placeholder={props.placeholder}
-        disabled={props.disabled}
-        label={props.label}
-        helperText={props.helperText}
-        error={meta.touched ? meta.error : undefined}
-        autoFocus={props.autoFocus}
-        autoComplete={props.autoComplete}
-        required={props.required}
-        className={props.className}
-        inputRef={props.inputRef}
-      />
-    )}
-  />
-);
+> = props => {
+  return (
+    <Field
+      name={props.name}
+      validate={props.validate}
+      parse={props.parse}
+      format={props.format}
+      isEqual={props.isEqual}
+      formatOnBlur={props.formatOnBlur}
+      allowNull={props.allowNull}
+      subscription={props.subscription}
+      render={({ input, meta }) => {
+        const handleChange: TextInputProps['onChange'] = value => {
+          if (props.onChange) {
+            props.onChange(value);
+
+            return;
+          }
+
+          input.onChange(value);
+        };
+
+        return (
+          <TextInput
+            type={props.type}
+            name={input.name}
+            value={input.value}
+            onChange={handleChange}
+            onFocus={input.onFocus}
+            onBlur={input.onBlur}
+            placeholder={props.placeholder}
+            disabled={props.disabled}
+            label={props.label}
+            helperText={props.helperText}
+            error={meta.touched ? meta.error : undefined}
+            autoFocus={props.autoFocus}
+            autoComplete={props.autoComplete}
+            required={props.required}
+            size={props.size}
+            className={props.className}
+            inputRef={props.inputRef}
+          />
+        );
+      }}
+    />
+  );
+};
 
 export default TextInputField;

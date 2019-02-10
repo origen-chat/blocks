@@ -11,10 +11,11 @@ const Wrapper = styled.div`
 export type InputErrorProps = Readonly<{
   error: string;
 }> &
+  Pick<React.HTMLAttributes<HTMLDivElement>, 'id'> &
   ClassNameProp;
 
 export const InputError: React.FunctionComponent<InputErrorProps> = props => (
-  <Wrapper role="alert" className={props.className}>
+  <Wrapper id={props.id} role="alert" className={props.className}>
     {props.error}
   </Wrapper>
 );

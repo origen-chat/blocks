@@ -4,7 +4,7 @@ import { render, fireEvent } from 'react-testing-library';
 import { TextInput } from './component';
 
 describe(`<TextInput />`, () => {
-  test('renders a label element when passed the label prop', () => {
+  test('renders a label when passed the label prop', () => {
     const label = 'test label';
 
     const { getByLabelText } = render(
@@ -60,7 +60,7 @@ describe(`<TextInput />`, () => {
     expect(handleChange).toHaveBeenCalledWith(newValue);
   });
 
-  test('displays helper text and the input has aria-describedby set correctly when passed the helperText prop', () => {
+  test('renders a helper text and the input has aria-describedby set correctly when passed the helperText prop', () => {
     const label = 'test label';
     const helperText = 'test helper text';
 
@@ -78,6 +78,27 @@ describe(`<TextInput />`, () => {
 
     expect(inputElement.getAttribute('aria-describedby')).toBe(
       helperTextElement.id,
+    );
+  });
+
+  test('renders an input with aria-errormessage set correctly when passed the error prop', () => {
+    const label = 'test label';
+    const error = 'test error';
+
+    const { getByLabelText, getByText } = render(
+      <TextInput
+        error={error}
+        label={label}
+        value="value"
+        onChange={jest.fn()}
+      />,
+    );
+
+    const inputElement = getByLabelText(label);
+    const errorElement = getByText(error);
+
+    expect(inputElement.getAttribute('aria-errormessage')).toBe(
+      errorElement.id,
     );
   });
 

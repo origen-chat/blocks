@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { ClassNameProp } from '../types';
 
@@ -15,16 +15,10 @@ const StyledLabel = styled.label<StyledLabelProps>`
       : 'var(--dark-secondary-text-color)'};
 
   transition: var(--sm-transition);
+`;
 
-  ${props =>
-    props.required &&
-    css`
-      &::after {
-        content: '*';
-
-        margin-left: var(--xs-margin);
-      }
-    `}
+export const RequiredStar = styled.span`
+  margin-left: var(--xs-margin);
 `;
 
 export type InputLabelProps = Readonly<{
@@ -35,15 +29,20 @@ export type InputLabelProps = Readonly<{
   Pick<React.LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'> &
   ClassNameProp;
 
-export const InputLabel: React.FunctionComponent<InputLabelProps> = props => (
-  <StyledLabel
-    hasFocus={props.hasFocus}
-    htmlFor={props.htmlFor}
-    required={!!props.required}
-    className={props.className}
-  >
-    {props.label}
-  </StyledLabel>
-);
+export const InputLabel: React.FunctionComponent<InputLabelProps> = props => {
+  const required = !!props.required;
+
+  return (
+    <StyledLabel
+      hasFocus={props.hasFocus}
+      htmlFor={props.htmlFor}
+      required={required}
+      className={props.className}
+    >
+      {props.label}
+      {required && <RequiredStar aria-hidden>*</RequiredStar>}
+    </StyledLabel>
+  );
+};
 
 export default InputLabel;

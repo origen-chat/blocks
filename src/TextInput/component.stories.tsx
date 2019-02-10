@@ -20,6 +20,11 @@ storiesOf('TextInput', module).add('generic', () => (
     label={text('Label', 'Text input')}
     error={text('Error', '')}
     helperText={text('Helper text', '')}
+    size={select(
+      'Size',
+      { Small: 'small', Medium: 'medium', Large: 'large' },
+      'medium',
+    )}
     required={boolean('Required', false)}
     disabled={boolean('Disabled', false)}
     {...events}

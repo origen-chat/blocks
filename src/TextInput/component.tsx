@@ -8,32 +8,48 @@ import InputHelperText from '../InputHelperText';
 import InputLabel from '../InputLabel';
 import { ClassNameProp } from '../types';
 
-const Wrapper = styled.div`
+import { largeWidth, mediumWidth, smallWidth, defaultWidth } from './constants';
+
+type WrapperProps = Pick<TextInputProps, 'size'>;
+
+const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
+
+  width: ${props => getWrapperWidth(props.size)};
 `;
 
+function getWrapperWidth(size?: TextInputSize): string {
+  if (size === 'large') {
+    return largeWidth;
+  }
+
+  if (size === 'medium') {
+    return mediumWidth;
+  }
+
+  if (size === 'small') {
+    return smallWidth;
+  }
+
+  return defaultWidth;
+}
+
 const StyledInput = styled(Input)`
-  align-self: stretch;
+  width: 100%;
 `;
 
 const StyledInputLabel = styled(InputLabel)`
-  align-self: stretch;
-
   margin-bottom: var(--xs-margin);
 `;
 
 const StyledInputError = styled(InputError)`
-  align-self: stretch;
-
   margin-top: var(--xs-margin);
 `;
 
 const StyledInputHelperText = styled(InputHelperText)`
-  align-self: stretch;
-
   margin-top: var(--xs-margin);
 `;
 
@@ -43,6 +59,7 @@ export type TextInputProps = Readonly<{
   label?: string;
   error?: string;
   helperText?: string;
+  size?: TextInputSize;
   onChange: (value: string) => void;
   inputRef?: React.RefObject<HTMLInputElement>;
   required?: boolean;
@@ -61,9 +78,12 @@ export type TextInputProps = Readonly<{
 
 export type TextInputType = 'text' | 'number' | 'password';
 
+export type TextInputSize = 'small' | 'medium' | 'large';
+
 export const TextInput: React.FunctionComponent<TextInputProps> = props => {
   const inputId = useUUIDv4();
   const helperTextId = useUUIDv4();
+  const errorId = useUUIDv4();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = event => {
     const { value } = event.target;
@@ -101,14 +121,16 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
     setIsPointerOver(false);
   };
 
+  const isInvalid = !!props.error;
+
   return (
-    <Wrapper className={props.className}>
+    <Wrapper size={props.size} className={props.className}>
       {props.label && (
         <StyledInputLabel
           hasFocus={hasFocus}
           htmlFor={inputId}
           label={props.label}
-          required={!!props.required}
+          required={props.required}
         />
       )}
       <StyledInput
@@ -120,19 +142,20 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder={props.placeholder}
-        isInvalid={!!props.error}
+        isInvalid={isInvalid}
         isPointerOver={isPointerOver}
         onPointerOver={handlePointerOver}
         onPointerLeave={handlePointerLeave}
         autoFocus={props.autoFocus}
         autoComplete={props.autoComplete}
         disabled={props.disabled}
-        aria-required={!!props.required}
-        aria-invalid={!!props.error}
-        aria-describedby={helperTextId}
+        aria-required={props.required}
+        aria-invalid={isInvalid}
+        aria-describedby={props.helperText && helperTextId}
+        aria-errormessage={props.error && errorId}
         ref={props.inputRef}
       />
-      {props.error && <StyledInputError error={props.error} />}
+      {props.error && <StyledInputError id={errorId} error={props.error} />}
       {props.helperText && (
         <StyledInputHelperText id={helperTextId} text={props.helperText} />
       )}
