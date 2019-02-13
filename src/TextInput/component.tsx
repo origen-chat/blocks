@@ -93,7 +93,7 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
 
   const [hasFocus, setHasFocus] = useState(false);
 
-  const handleFocus: TextInputProps['onFocus'] = event => {
+  const handleFocus: NonNullable<TextInputProps['onFocus']> = event => {
     setHasFocus(true);
 
     if (props.onFocus) {
@@ -101,7 +101,7 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
     }
   };
 
-  const handleBlur: TextInputProps['onBlur'] = event => {
+  const handleBlur: NonNullable<TextInputProps['onBlur']> = event => {
     setHasFocus(false);
 
     if (props.onBlur) {
