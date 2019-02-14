@@ -20,4 +20,4 @@ export const InputError: React.FunctionComponent<InputErrorProps> = props => (
   </Wrapper>
 );
 
-export default InputError;
+export default React.memo(InputError);

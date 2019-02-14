@@ -17,11 +17,16 @@ export const spaces = css`
   --md-padding: 1rem;
   --lg-padding: 1.2rem;
   --xl-padding: 1.6rem;
+  --xxl-padding: 2.1rem;
 
   @media (min-width: ${breakpoints.lg}) {
     --lg-margin: 2rem;
     --xl-margin: 3rem;
     --xxl-margin: 5rem;
+
+    --lg-padding: 1.4rem;
+    --xl-padding: 2rem;
+    --xxl-padding: 2.6rem;
   }
 `;
 

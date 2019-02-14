@@ -83,4 +83,4 @@ export const TextInputField: React.FunctionComponent<
   );
 };
 
-export default TextInputField;
+export default React.memo(TextInputField);

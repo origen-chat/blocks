@@ -10,7 +10,7 @@ const events = actions(
   'onClick',
   'onPointerDown',
   'onPointerUp',
-  'onPointerOver',
+  'onPointerEnter',
   'onPointerLeave',
 );
 

@@ -22,4 +22,4 @@ export const InputHelperText: React.FunctionComponent<
   </Wrapper>
 );
 
-export default InputHelperText;
+export default React.memo(InputHelperText);

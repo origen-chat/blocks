@@ -14,7 +14,7 @@ export function getButtonSizeStyles(
     return css`
       font-size: var(--xs-font-size);
       padding: 0 var(--sm-padding);
-      height: 1.4rem;
+      height: 1.5rem;
     `;
   }
 
@@ -22,15 +22,15 @@ export function getButtonSizeStyles(
     return css`
       font-size: var(--sm-font-size);
       padding: 0 var(--md-padding);
-      height: 1.5rem;
+      height: 1.8rem;
     `;
   }
 
   if (size === 'large') {
     return css`
       font-size: var(--md-font-size);
-      padding: 0 var(--xl-padding);
-      height: 1.8rem;
+      padding: 0 var(--xxl-padding);
+      height: 2.6rem;
     `;
   }
 
@@ -51,7 +51,7 @@ export function getButtonVariantStyles(args: GetButtonVariantStylesArgs): any {
 
     if (args.color === 'primary') {
       backgroundColor = 'var(--primary-color-500)';
-      backgroundColorWhenPointerOver = 'var(--primary-color-600)';
+      backgroundColorWhenPointerOver = 'var(--primary-color-400)';
     } else if (args.color === 'accent') {
       backgroundColor = 'var(--accent-color-500)';
       backgroundColorWhenPointerOver = 'var(--accent-color-600)';
@@ -62,7 +62,6 @@ export function getButtonVariantStyles(args: GetButtonVariantStylesArgs): any {
 
     return css<WrapperProps>`
       border-style: none;
-
       color: white;
       background-color: ${backgroundColor};
 

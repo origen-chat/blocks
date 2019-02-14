@@ -111,7 +111,9 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
 
   const [isPointerOver, setIsPointerOver] = useState(false);
 
-  const handlePointerOver: React.PointerEventHandler<HTMLInputElement> = () => {
+  const handlePointerEnter: React.PointerEventHandler<
+    HTMLInputElement
+  > = () => {
     setIsPointerOver(true);
   };
 
@@ -144,7 +146,7 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
         placeholder={props.placeholder}
         isInvalid={isInvalid}
         isPointerOver={isPointerOver}
-        onPointerOver={handlePointerOver}
+        onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
         autoFocus={props.autoFocus}
         autoComplete={props.autoComplete}

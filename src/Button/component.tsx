@@ -21,8 +21,8 @@ const Wrapper = styled.button<WrapperProps>`
 
   border-radius: var(--md-border-radius);
   font-weight: var(--bold-font-weight);
-  transition-property: background, color, border, box-shadow;
-  transition-duration: var(--md-transition);
+  transition-property: background, color, border;
+  transition-duration: var(--sm-transition);
 
   outline: none;
 
@@ -61,7 +61,7 @@ export type ButtonProps = Readonly<{
     | 'onClick'
     | 'onPointerDown'
     | 'onPointerUp'
-    | 'onPointerOver'
+    | 'onPointerEnter'
     | 'onPointerLeave'
     | 'autoFocus'
     | 'aria-label'
@@ -75,14 +75,14 @@ export type ButtonSize = 'small' | 'medium' | 'large';
 
 export const Button: React.FunctionComponent<ButtonProps> = props => {
   const {
-    handlePointerOver,
+    handlePointerEnter,
     handlePointerLeave,
     handlePointerDown,
     handlePointerUp,
     isPointerOver,
     isPointerDown,
   } = usePointerEventHandlersAndState({
-    onPointerOver: props.onPointerOver,
+    onPointerEnter: props.onPointerEnter,
     onPointerLeave: props.onPointerLeave,
     onPointerDown: props.onPointerDown,
     onPointerUp: props.onPointerUp,
@@ -97,7 +97,7 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
       onClick={props.onClick}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
-      onPointerOver={handlePointerOver}
+      onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
       isPointerOver={isPointerOver}
       isPointerDown={isPointerDown}
@@ -114,7 +114,7 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
 type UsePointerEventHandlersAndStateArgs = Readonly<
   Partial<
     Record<
-      'onPointerOver' | 'onPointerLeave' | 'onPointerDown' | 'onPointerUp',
+      'onPointerEnter' | 'onPointerLeave' | 'onPointerDown' | 'onPointerUp',
       React.PointerEventHandler<HTMLButtonElement>
     >
   >
@@ -122,7 +122,7 @@ type UsePointerEventHandlersAndStateArgs = Readonly<
 
 type UsePointerEventHandlersAndStateReturn = Readonly<
   Record<
-    | 'handlePointerOver'
+    | 'handlePointerEnter'
     | 'handlePointerLeave'
     | 'handlePointerDown'
     | 'handlePointerUp',
@@ -136,13 +136,13 @@ function usePointerEventHandlersAndState(
 ): UsePointerEventHandlersAndStateReturn {
   const [isPointerOver, setIsPointerOver] = useState(false);
 
-  const handlePointerOver: React.PointerEventHandler<
+  const handlePointerEnter: React.PointerEventHandler<
     HTMLButtonElement
   > = event => {
     setIsPointerOver(true);
 
-    if (args.onPointerOver) {
-      args.onPointerOver(event);
+    if (args.onPointerEnter) {
+      args.onPointerEnter(event);
     }
   };
 
@@ -158,6 +158,10 @@ function usePointerEventHandlersAndState(
 
   const [isPointerDown, setIsPointerDown] = useState(false);
 
+  const handleDocumentPointerUp = () => {
+    setIsPointerDown(false);
+  };
+
   const handlePointerDown: React.PointerEventHandler<
     HTMLButtonElement
   > = event => {
@@ -166,11 +170,19 @@ function usePointerEventHandlersAndState(
     if (args.onPointerDown) {
       args.onPointerDown(event);
     }
+
+    document.addEventListener('pointerup', handleDocumentPointerUp, {
+      once: true,
+    });
   };
 
   const handlePointerUp: React.PointerEventHandler<
     HTMLButtonElement
   > = event => {
+    if (isPointerDown) {
+      document.removeEventListener('pointerup', handleDocumentPointerUp);
+    }
+
     setIsPointerDown(false);
 
     if (args.onPointerUp) {
@@ -179,7 +191,7 @@ function usePointerEventHandlersAndState(
   };
 
   return {
-    handlePointerOver,
+    handlePointerEnter,
     handlePointerLeave,
     handlePointerDown,
     handlePointerUp,
@@ -194,4 +206,4 @@ Button.defaultProps = {
   variant: 'contained',
 };
 
-export default Button;
+export default React.memo(Button);

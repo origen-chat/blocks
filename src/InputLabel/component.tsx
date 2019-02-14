@@ -45,4 +45,4 @@ export const InputLabel: React.FunctionComponent<InputLabelProps> = props => {
   );
 };
 
-export default InputLabel;
+export default React.memo(InputLabel);
