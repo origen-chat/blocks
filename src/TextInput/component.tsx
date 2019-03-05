@@ -63,6 +63,7 @@ export type TextInputProps = Readonly<{
   onChange: (value: string) => void;
   inputRef?: React.RefObject<HTMLInputElement>;
   required?: boolean;
+  showOptionalLabel?: boolean;
 }> &
   Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -132,7 +133,7 @@ export const TextInput: React.FunctionComponent<TextInputProps> = props => {
           hasFocus={hasFocus}
           htmlFor={inputId}
           label={props.label}
-          required={props.required}
+          showOptionalLabel={props.showOptionalLabel}
         />
       )}
       <StyledInput

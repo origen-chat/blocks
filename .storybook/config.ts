@@ -3,6 +3,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { addDecorator, configure } from '@storybook/react';
 import React from 'react';
 
+import './i18n';
 import GlobalStyle from '../src/GlobalStyle';
 
 configureStorybook();
@@ -22,7 +23,7 @@ function addDecorators() {
       React.Fragment,
       null,
       React.createElement(GlobalStyle, null, null),
-      React.createElement('div', null, storyFn()),
+      React.createElement(React.Suspense, { fallback: null }, storyFn()),
     ),
   );
 }

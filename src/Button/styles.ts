@@ -41,7 +41,6 @@ export type GetButtonVariantStylesArgs = Readonly<{
   variant: ButtonVariant;
   color: ButtonColor;
   isPointerOver: boolean;
-  isPointerDown: boolean;
 }>;
 
 export function getButtonVariantStyles(args: GetButtonVariantStylesArgs): any {
@@ -69,13 +68,6 @@ export function getButtonVariantStyles(args: GetButtonVariantStylesArgs): any {
         props.isPointerOver &&
         css`
           background-color: ${backgroundColorWhenPointerOver};
-        `}
-
-      ${props =>
-        props.isPointerDown &&
-        css`
-          box-shadow: none;
-          transform: scale(0.95);
         `}
     `;
   }

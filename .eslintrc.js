@@ -57,6 +57,13 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.tsx'] },
     ],
 
+    'react/prop-types': 'off',
+    'react/sort-comp': 'off',
+    'react/destructuring-assignment': 'off',
+
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
+
     'import/no-named-as-default': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
@@ -103,12 +110,6 @@ module.exports = {
         'no-shadow': 'off',
         'prefer-destructuring': 'off',
         'no-multi-str': 'off',
-
-        'react/prop-types': 'off',
-        'react/sort-comp': 'off',
-        'react/destructuring-assignment': 'off',
-
-        'react-hooks/rules-of-hooks': 'error',
 
         'import/export': 'off',
 

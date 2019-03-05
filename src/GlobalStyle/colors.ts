@@ -4,6 +4,7 @@ export const colors = css`
   --dark-primary-text-color: hsla(226, 13%, 5%, 1);
   --dark-secondary-text-color: hsla(226, 6%, 26%, 1);
   --dark-tertiary-text-color: hsla(226, 5%, 46%, 1);
+  --dark-quaternary-text-color: hsla(226, 5%, 66%, 1);
   --light-primary-text-color: hsl();
   --light-secondary-text-color: hsl();
   --light-tertiary-text-color: hsl();
@@ -20,11 +21,11 @@ export const colors = css`
 
   --accent-color-100: hsl();
   --accent-color-200: hsl();
-  --accent-color-300: hsl();
+  --accent-color-300: var(--primary-color-300);
   --accent-color-400: hsl();
   --accent-color-500: hsl();
   --accent-color-600: hsl();
-  --accent-color-700: hsl();
+  --accent-color-700: hsl()
   --accent-color-800: hsl();
   --accent-color-900: hsl();
 
@@ -69,6 +70,8 @@ export const colors = css`
   --success-color-900: hsl();
 
   --shadow-color: hsla(0, 0%, 0%, 0.2);
+
+  --focus-outline-color: var(--accent-color-300);
 `;
 
 export default colors;

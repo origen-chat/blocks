@@ -12,6 +12,7 @@ const events = actions(
   'onPointerUp',
   'onPointerEnter',
   'onPointerLeave',
+  'onPointerCancel',
 );
 
 storiesOf('Button', module).add('contained', () => (

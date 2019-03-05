@@ -10,7 +10,6 @@ export type WrapperProps = Pick<
   'color' | 'disabled' | 'size' | 'variant'
 > &
   Readonly<{
-    isPointerDown: boolean;
     isPointerOver: boolean;
   }>;
 
@@ -21,10 +20,19 @@ const Wrapper = styled.button<WrapperProps>`
 
   border-radius: var(--md-border-radius);
   font-weight: var(--bold-font-weight);
-  transition-property: background, color, border;
-  transition-duration: var(--sm-transition);
+  transition-property: all;
+  transition-duration: var(--xs-transition);
 
   outline: none;
+  user-select: none;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: var(--md-border-width) solid var(--focus-outline-color);
+  }
 
   ${props => getButtonSizeStyles(props.size)}
   ${props =>
@@ -32,7 +40,6 @@ const Wrapper = styled.button<WrapperProps>`
       variant: props.variant,
       color: props.color,
       isPointerOver: props.isPointerOver,
-      isPointerDown: props.isPointerDown,
     })}
 
 
@@ -63,6 +70,7 @@ export type ButtonProps = Readonly<{
     | 'onPointerUp'
     | 'onPointerEnter'
     | 'onPointerLeave'
+    | 'onPointerCancel'
     | 'autoFocus'
     | 'aria-label'
   > &
@@ -77,15 +85,10 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
   const {
     handlePointerEnter,
     handlePointerLeave,
-    handlePointerDown,
-    handlePointerUp,
     isPointerOver,
-    isPointerDown,
   } = usePointerEventHandlersAndState({
     onPointerEnter: props.onPointerEnter,
     onPointerLeave: props.onPointerLeave,
-    onPointerDown: props.onPointerDown,
-    onPointerUp: props.onPointerUp,
   });
 
   return (
@@ -95,12 +98,12 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
       size={props.size}
       color={props.color}
       onClick={props.onClick}
-      onPointerDown={handlePointerDown}
-      onPointerUp={handlePointerUp}
+      onPointerDown={props.onPointerDown}
+      onPointerUp={props.onPointerUp}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
+      onPointerCancel={props.onPointerCancel}
       isPointerOver={isPointerOver}
-      isPointerDown={isPointerDown}
       disabled={props.disabled}
       autoFocus={props.autoFocus}
       className={props.className}
@@ -114,7 +117,7 @@ export const Button: React.FunctionComponent<ButtonProps> = props => {
 type UsePointerEventHandlersAndStateArgs = Readonly<
   Partial<
     Record<
-      'onPointerEnter' | 'onPointerLeave' | 'onPointerDown' | 'onPointerUp',
+      'onPointerEnter' | 'onPointerLeave',
       React.PointerEventHandler<HTMLButtonElement>
     >
   >
@@ -122,13 +125,10 @@ type UsePointerEventHandlersAndStateArgs = Readonly<
 
 type UsePointerEventHandlersAndStateReturn = Readonly<
   Record<
-    | 'handlePointerEnter'
-    | 'handlePointerLeave'
-    | 'handlePointerDown'
-    | 'handlePointerUp',
+    'handlePointerEnter' | 'handlePointerLeave',
     React.PointerEventHandler<HTMLButtonElement>
   > &
-    Record<'isPointerOver' | 'isPointerDown', boolean>
+    Record<'isPointerOver', boolean>
 >;
 
 function usePointerEventHandlersAndState(
@@ -156,46 +156,9 @@ function usePointerEventHandlersAndState(
     }
   };
 
-  const [isPointerDown, setIsPointerDown] = useState(false);
-
-  const handleDocumentPointerUp = () => {
-    setIsPointerDown(false);
-  };
-
-  const handlePointerDown: React.PointerEventHandler<
-    HTMLButtonElement
-  > = event => {
-    setIsPointerDown(true);
-
-    if (args.onPointerDown) {
-      args.onPointerDown(event);
-    }
-
-    document.addEventListener('pointerup', handleDocumentPointerUp, {
-      once: true,
-    });
-  };
-
-  const handlePointerUp: React.PointerEventHandler<
-    HTMLButtonElement
-  > = event => {
-    if (isPointerDown) {
-      document.removeEventListener('pointerup', handleDocumentPointerUp);
-    }
-
-    setIsPointerDown(false);
-
-    if (args.onPointerUp) {
-      args.onPointerUp(event);
-    }
-  };
-
   return {
     handlePointerEnter,
     handlePointerLeave,
-    handlePointerDown,
-    handlePointerUp,
-    isPointerDown,
     isPointerOver,
   };
 }

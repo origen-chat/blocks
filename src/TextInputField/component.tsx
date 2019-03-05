@@ -16,6 +16,7 @@ export type TextInputFieldProps = Pick<
   | 'autoFocus'
   | 'autoComplete'
   | 'required'
+  | 'showOptionalLabel'
   | 'size'
   | 'inputRef'
 > &
@@ -73,6 +74,7 @@ export const TextInputField: React.FunctionComponent<
             autoFocus={props.autoFocus}
             autoComplete={props.autoComplete}
             required={props.required}
+            showOptionalLabel={props.showOptionalLabel}
             size={props.size}
             className={props.className}
             inputRef={props.inputRef}

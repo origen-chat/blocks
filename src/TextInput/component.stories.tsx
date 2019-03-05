@@ -26,6 +26,7 @@ storiesOf('TextInput', module).add('generic', () => (
       'medium',
     )}
     required={boolean('Required', false)}
+    showOptionalLabel={boolean('Show optional label', false)}
     disabled={boolean('Disabled', false)}
     {...events}
   />
