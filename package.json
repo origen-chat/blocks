@@ -76,7 +76,7 @@
     "@types/storybook__addon-actions": "3.4.2",
     "@types/storybook__addon-knobs": "4.0.1",
     "@types/storybook__react": "4.0.1",
-    "@types/styled-components": "4.1.11",
+    "@types/styled-components": "4.1.12",
     "@types/uuid": "3.4.4",
     "@typescript-eslint/eslint-plugin": "1.4.2",
     "@typescript-eslint/parser": "1.4.2",
