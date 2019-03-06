@@ -22,7 +22,7 @@ export type TextInputFieldProps = Pick<
 > &
   Partial<Pick<TextInputProps, 'onChange'>> &
   Pick<
-    FieldProps,
+    FieldProps<HTMLInputElement>,
     | 'name'
     | 'validate'
     | 'parse'
@@ -55,6 +55,7 @@ export const TextInputField: React.FunctionComponent<
             return;
           }
 
+          // @ts-ignore
           input.onChange(value);
         };
 

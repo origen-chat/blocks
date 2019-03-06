@@ -1,4 +1,6 @@
-module.exports = (baseConfig, env, config) => {
+module.exports = ({ config }) => {
+  console.log('config ======>', config);
+
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
     use: [
