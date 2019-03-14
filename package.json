@@ -100,7 +100,7 @@
     "eslint-plugin-prettier": "3.0.1",
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-react": "7.12.4",
-    "eslint-plugin-react-hooks": "1.5.0",
+    "eslint-plugin-react-hooks": "1.5.1",
     "eslint-plugin-unicorn": "7.1.0",
     "final-form": "4.12.0",
     "husky": "1.3.1",
