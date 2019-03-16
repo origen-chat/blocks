@@ -39,7 +39,6 @@ function setParameters(): void {
 }
 
 function loadStories(): void {
-  // @ts-ignore
   const requireContext = require.context('../src', true, /\.stories\.tsx$/);
 
   requireContext.keys().forEach(key => {

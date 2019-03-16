@@ -20,8 +20,6 @@ const Wrapper = styled.button<WrapperProps>`
 
   border-radius: var(--md-border-radius);
   font-weight: var(--bold-font-weight);
-  transition-property: all;
-  transition-duration: var(--xs-transition);
 
   outline: none;
   user-select: none;
