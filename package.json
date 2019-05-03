@@ -108,7 +108,7 @@
     "jest": "24.7.1",
     "jest-dom": "3.1.4",
     "jest-styled-components": "6.3.1",
-    "lint-staged": "8.1.5",
+    "lint-staged": "8.1.6",
     "mkdirp": "0.5.1",
     "prettier": "1.17.0",
     "prettier-eslint": "8.8.2",
