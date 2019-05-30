@@ -123,7 +123,7 @@
     "rollup-plugin-node-resolve": "4.2.4",
     "rollup-plugin-replace": "2.2.0",
     "semantic-release": "15.13.12",
-    "styled-components": "4.2.0",
+    "styled-components": "4.2.1",
     "typescript": "3.5.1"
   },
   "keywords": [
