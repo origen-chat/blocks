@@ -116,7 +116,7 @@
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-final-form": "4.1.0",
-    "react-i18next": "10.11.1",
+    "react-i18next": "10.11.2",
     "react-testing-library": "6.1.2",
     "rollup": "1.15.6",
     "rollup-plugin-babel": "4.3.2",
