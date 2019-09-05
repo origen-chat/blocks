@@ -118,7 +118,7 @@
     "react-final-form": "4.1.0",
     "react-i18next": "10.12.2",
     "react-testing-library": "6.1.2",
-    "rollup": "1.19.4",
+    "rollup": "1.20.3",
     "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-node-resolve": "4.2.4",
     "rollup-plugin-replace": "2.2.0",
