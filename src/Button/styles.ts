@@ -47,16 +47,20 @@ export function getButtonVariantStyles(args: GetButtonVariantStylesArgs): any {
   if (args.variant === 'contained') {
     let backgroundColor: string;
     let backgroundColorWhenPointerOver: string;
+    let backgroundColorWhenActive: string;
 
     if (args.color === 'primary') {
       backgroundColor = 'var(--primary-color-500)';
       backgroundColorWhenPointerOver = 'var(--primary-color-400)';
+      backgroundColorWhenActive = 'var(--primary-color-600)';
     } else if (args.color === 'accent') {
       backgroundColor = 'var(--accent-color-500)';
-      backgroundColorWhenPointerOver = 'var(--accent-color-600)';
+      backgroundColorWhenPointerOver = 'var(--accent-color-400)';
+      backgroundColorWhenActive = 'var(--accent-color-600)';
     } else {
       backgroundColor = 'var(--danger-color-500)';
-      backgroundColorWhenPointerOver = 'var(--danger-color-600)';
+      backgroundColorWhenPointerOver = 'var(--danger-color-400)';
+      backgroundColorWhenActive = 'var(--danger-color-600)';
     }
 
     return css<WrapperProps>`
@@ -69,6 +73,10 @@ export function getButtonVariantStyles(args: GetButtonVariantStylesArgs): any {
         css`
           background-color: ${backgroundColorWhenPointerOver};
         `}
+
+      &:active {
+        background-color: ${backgroundColorWhenActive};
+      }
     `;
   }
 
